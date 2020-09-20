@@ -1,0 +1,13 @@
+{
+  "log": {
+    "level": "info"
+  },
+  "sql": {
+
+  },
+  "net": {
+    "addr": "localhost",
+    "port": 8000
+  }
+
+}
