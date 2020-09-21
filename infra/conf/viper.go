@@ -1,4 +1,4 @@
-package infra
+package conf
 
 import (
 	"github.com/spf13/viper"
@@ -7,17 +7,17 @@ import (
 	"sync"
 )
 
-var cv *viper.Viper
+var cv *Viper
 var cvLock sync.RWMutex
 
-func NewViper(cfgPath string) *viper.Viper {
+func NewViper(cfgPath string) *Viper {
 	if len(cfgPath) > 0 {
 		viper.SetConfigFile(cfgPath)
-		viper.SetConfigType("toml")
+		viper.SetConfigType("json")
 		viper.AddConfigPath(filepath.Base(cfgPath))
 	} else {
 		viper.SetConfigName("config") // name of config file (without extension)
-		viper.SetConfigType("toml")
+		viper.SetConfigType("json")
 		/*viper.AddConfigPath("../etc/")
 		viper.AddConfigPath("./etc/")*/
 		viper.AddConfigPath(AppPath + "configs/") // TODO:路径不应该先死
@@ -30,7 +30,7 @@ func NewViper(cfgPath string) *viper.Viper {
 	return cv
 }
 
-func ReloadViper() *viper.Viper {
+func ReloadViper() *Viper {
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			log.Fatal(err)

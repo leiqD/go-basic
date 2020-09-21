@@ -4,11 +4,11 @@ package launcher
 
 import (
 	"github.com/google/wire"
-	"github.com/leiqD/go-socket5/infra"
+	"github.com/leiqD/go-socket5/infra/conf"
 )
 
-func InitializeConfig(cfgPath string) *infra.Configs {
-	wire.Build(infra.NewConfig, infra.NewViper)
+func InitializeConfig(cfgPath string) *conf.Configs {
+	wire.Build(conf.NewConfig, conf.NewViper)
 
 	return nil
 }

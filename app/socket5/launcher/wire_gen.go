@@ -6,13 +6,13 @@
 package launcher
 
 import (
-	"github.com/leiqD/go-socket5/infra"
+	"github.com/leiqD/go-socket5/infra/conf"
 )
 
 // Injectors from wire.go:
 
-func InitializeConfig(cfgPath string) *infra.Configs {
-	viper := infra.NewViper(cfgPath)
-	configs := infra.NewConfig(viper)
+func InitializeConfig(cfgPath string) *conf.Configs {
+	viper := conf.NewViper(cfgPath)
+	configs := conf.NewConfig(viper)
 	return configs
 }
