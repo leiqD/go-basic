@@ -1,6 +1,7 @@
 {
   "log": {
-    "level": "info"
+    "level": "info",
+    "path":"/home/workspace/go-socket5/var/log/socket.log"
   },
   "sql": {
 

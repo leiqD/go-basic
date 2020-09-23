@@ -1,6 +1,7 @@
 package logger
 
 import (
+	"github.com/leiqD/go-socket5/infra/conf"
 	"go.uber.org/zap"
 	"runtime"
 	"strings"
@@ -29,10 +30,11 @@ type Logger interface {
 var LoggerIns *Zap
 var LoggerInsOnce sync.Once
 
-func NewLogger(level string, path string, maxSize int, maxBackups int, maxAge int) *Zap {
-	cfg := NewParam(level, path, maxSize, maxBackups, maxAge)
+func NewLogger(cfg *conf.Configs) *Zap {
+	log := cfg.LogConf()
+	param := NewParam(log.Level, log.Path, log.MaxSize, log.MaxBackupNum, log.MackupDuration)
 	LoggerInsOnce.Do(func() {
-		LoggerIns = NewLoggerZap(cfg)
+		LoggerIns = NewLoggerZap(param)
 	})
 	return LoggerIns
 }

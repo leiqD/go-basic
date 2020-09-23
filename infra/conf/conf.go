@@ -9,7 +9,7 @@ import (
 )
 
 type Configs struct {
-	viper *Viper
+	Viper *Viper
 }
 
 var C *Configs
@@ -28,11 +28,16 @@ func init() {
 
 func NewConfig(vc *Viper) *Configs {
 	cOnce.Do(func() {
-		C = &Configs{viper: vc}
+		C = &Configs{Viper: vc}
 	})
 	return C
 }
 
 func (c *Configs) ReloadViper() {
-	c.viper = ReloadViper()
+	c.Viper = ReloadViper()
+}
+
+func (c *Configs) LogConf() *Log {
+	log := c.Viper.Log
+	return &log
 }

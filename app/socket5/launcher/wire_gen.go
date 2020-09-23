@@ -7,6 +7,7 @@ package launcher
 
 import (
 	"github.com/leiqD/go-socket5/infra/conf"
+	"github.com/leiqD/go-socket5/infra/logger"
 )
 
 // Injectors from wire.go:
@@ -15,4 +16,9 @@ func InitializeConfig(cfgPath string) *conf.Configs {
 	viper := conf.NewViper(cfgPath)
 	configs := conf.NewConfig(viper)
 	return configs
+}
+
+func InitializeLog(cfg *conf.Configs) *logger.Zap {
+	zap := logger.NewLogger(cfg)
+	return zap
 }

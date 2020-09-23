@@ -1,24 +1,27 @@
 package conf
 
 type Log struct {
-	level string
-	path  string
+	Level          string
+	Path           string
+	MaxSize        int
+	MaxBackupNum   int
+	MackupDuration int
 }
 
 type Sql struct {
-	host  string
-	port  string
-	db    string
-	user  string
-	paswd string
+	Host  string
+	Port  string
+	Db    string
+	User  string
+	Paswd string
 }
 type Net struct {
-	host string
-	port string
+	Host string
+	Port string
 }
 
 type Viper struct {
-	log Log
-	sql Sql
-	net Net
+	Log Log
+	Sql Sql
+	Net Net
 }
