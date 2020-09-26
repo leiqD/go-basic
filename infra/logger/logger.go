@@ -8,7 +8,7 @@ import (
 	"sync"
 )
 
-type Logger interface {
+type LoggerInterface interface {
 	Debugw(template string, args ...interface{})
 	Debugf(template string, args ...interface{})
 	Printf(template string, args ...interface{})
@@ -27,11 +27,15 @@ type Logger interface {
 	Stop()
 }
 
+type LoggerConfig interface {
+	Log() *conf.LogInfo
+}
+
 var LoggerIns *Zap
 var LoggerInsOnce sync.Once
 
-func NewLogger(cfg *conf.Configs) *Zap {
-	log := cfg.LogConf()
+func NewLogger(cfg LoggerConfig) *Zap {
+	log := cfg.Log()
 	param := NewParam(log.Level, log.Path, log.MaxSize, log.MaxBackupNum, log.MackupDuration)
 	LoggerInsOnce.Do(func() {
 		LoggerIns = NewLoggerZap(param)

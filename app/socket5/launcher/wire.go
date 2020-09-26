@@ -5,7 +5,9 @@ package launcher
 import (
 	"github.com/google/wire"
 	"github.com/leiqD/go-socket5/infra/conf"
+	"github.com/leiqD/go-socket5/infra/datastore"
 	"github.com/leiqD/go-socket5/infra/logger"
+	"gorm.io/gorm"
 )
 
 func InitializeConfig(cfgPath string) *conf.Configs {
@@ -13,7 +15,12 @@ func InitializeConfig(cfgPath string) *conf.Configs {
 	return nil
 }
 
-func InitializeLog(cfg *conf.Configs) *logger.Zap {
+func InitializeLog(cfg logger.LoggerConfig) *logger.Zap {
 	wire.Build(logger.NewLogger)
 	return nil
+}
+
+func InitialDataStore(cfg datastore.MYSQLconfig) (*gorm.DB, error) {
+	wire.Build(datastore.NewMYSQLDB)
+	return nil, nil
 }

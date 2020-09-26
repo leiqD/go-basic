@@ -12,6 +12,13 @@ type Configs struct {
 	Viper *Viper
 }
 
+/*
+type ConfigsInterface interface {
+	ReloadViper()
+	Log() *LogInfo
+	DataBase() *DataStoreInfo
+}
+*/
 var C *Configs
 var cOnce sync.Once
 var AppPath string
@@ -37,7 +44,12 @@ func (c *Configs) ReloadViper() {
 	c.Viper = ReloadViper()
 }
 
-func (c *Configs) LogConf() *Log {
+func (c *Configs) Log() *LogInfo {
 	log := c.Viper.Log
 	return &log
+}
+
+func (c *Configs) DataBase() *DataStoreInfo {
+	sql := c.Viper.DataStore
+	return &sql
 }

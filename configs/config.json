@@ -1,12 +1,21 @@
 {
-  "log": {
+  "Log": {
     "level": "info",
     "path":"/home/workspace/go-socket5/var/log/socket.log"
   },
-  "sql": {
-
+  "DataStore": {
+    "Host":"127.0.0.1:3306",
+    "Db":"socket",
+    "User":"mysql",
+    "Paswd": "123456",
+    "Net": "tcp",
+    "Params": {
+      "MaxIdleConns": 100,
+      "MaxOpenConns": 10,
+      "ConnMaxLifetime": 300
+    }
   },
-  "net": {
+  "Net": {
     "addr": "localhost",
     "port": 8000
   }

@@ -7,7 +7,9 @@ package launcher
 
 import (
 	"github.com/leiqD/go-socket5/infra/conf"
+	"github.com/leiqD/go-socket5/infra/datastore"
 	"github.com/leiqD/go-socket5/infra/logger"
+	"gorm.io/gorm"
 )
 
 // Injectors from wire.go:
@@ -18,7 +20,15 @@ func InitializeConfig(cfgPath string) *conf.Configs {
 	return configs
 }
 
-func InitializeLog(cfg *conf.Configs) *logger.Zap {
+func InitializeLog(cfg logger.LoggerConfig) *logger.Zap {
 	zap := logger.NewLogger(cfg)
 	return zap
+}
+
+func InitialDataStore(cfg datastore.MYSQLconfig) (*gorm.DB, error) {
+	db, err := datastore.NewMYSQLDB(cfg)
+	if err != nil {
+		return nil, err
+	}
+	return db, nil
 }
